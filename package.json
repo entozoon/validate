@@ -1,6 +1,6 @@
 {
   "name": "validate-npm-wrapper",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A wrapper for https://github.com/cferdinandi/validate as they're ignoring my NPM publish requests, and using it directly from github as suggested is mad shonky.",
   "main": "./dist/validate.polyfills.min.js",
   "author": {
