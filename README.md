@@ -1,18 +1,22 @@
 # Validate.js [![Build Status](https://travis-ci.org/cferdinandi/validate.svg)](https://travis-ci.org/cferdinandi/validate)
+
+**A wrapper for https://github.com/cferdinandi/validate as they're ignoring my NPM publish requests, and using it directly from github as suggested is mad shonky.**
+
+## Install
+
+    npm i --save validate-npm-wrapper
+
 A lightweight form validation script that augments native HTML5 form validation elements and attributes, providing a better user experience and giving you more control.
 
 When a visitor leaves a field, Validate.js immediately validates the field and displays an error if applicable. It also validates the entire form on submit, and provides support for custom `onSubmit()` functions (for example, Ajax form submission).
 
 [View the demo](http://cferdinandi.github.io/validate/)
 
-
 <hr>
 
 ### Want to learn how to write your own vanilla JS plugins? Check out my [Vanilla JS Pocket Guides](https://vanillajsguides.com/) or join the [Vanilla JS Academy](https://vanillajsacademy.com) and level-up as a web developer. 🚀
 
 <hr>
-
-
 
 ## Getting Started
 
@@ -99,22 +103,17 @@ In the footer of your page, after the content, initialize Validate.js. And that'
 </script>
 ```
 
-
-
 ## ES6 Modules
 
 Validate does not have a default export, but does support CommonJS and can be used with native ES6 module imports.
 
 ```js
-import('/path/to/validate.polyfills.min.js')
-	.then(function () {
-		validate.init();
-	});
+import("/path/to/validate.polyfills.min.js").then(function() {
+  validate.init();
+});
 ```
 
 It uses a UMD pattern, and should also work in most major module bundlers and package managers.
-
-
 
 ## Styling Errors
 
@@ -127,37 +126,34 @@ Need a starting point? Here's some really lightweight CSS you can use.
  * Form Validation Errors
  */
 .error {
-	border-color: red;
+  border-color: red;
 }
 
 .error-message {
-	color: red;
-	font-style: italic;
-	margin-bottom: 1em;
+  color: red;
+  font-style: italic;
+  margin-bottom: 1em;
 }
 ```
-
-
 
 ## Working with the Source Files
 
 If you would prefer, you can work with the development code in the `src` directory using the included [Gulp build system](http://gulpjs.com/). This compiles, lints, and minifies code.
 
 ### Dependencies
+
 Make sure these are installed first.
 
-* [Node.js](http://nodejs.org)
-* [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
+- [Node.js](http://nodejs.org)
+- [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
 
 ### Quick Start
 
 1. In bash/terminal/command line, `cd` into your project directory.
 2. Run `npm install` to install required files.
 3. When it's done installing, run one of the task runners to get going:
-	* `gulp` manually compiles files.
-	* `gulp watch` automatically compiles files when changes are made and applies changes using [LiveReload](http://livereload.com/).
-
-
+   - `gulp` manually compiles files.
+   - `gulp watch` automatically compiles files when changes are made and applies changes using [LiveReload](http://livereload.com/).
 
 ## Options and Settings
 
@@ -169,39 +165,39 @@ You can pass options and callbacks into Validate through the `init()` function:
 
 ```javascript
 validate.init({
+  // Classes and Selectors
+  selector: "[data-validate]", // The selector for forms to validate
+  fieldClass: "error", // The class to apply to fields with errors
+  errorClass: "error-message", // The class to apply to error messages
 
-	// Classes and Selectors
-	selector: '[data-validate]', // The selector for forms to validate
-	fieldClass: 'error', // The class to apply to fields with errors
-	errorClass: 'error-message', // The class to apply to error messages
+  // Messages
+  messageValueMissing: "Please fill out this field.", // Displayed when a required field is left empty
+  messageValueMissingCheckbox: "This field is required.", // Displayed when a required checkbox isn't checked
+  messageValueMissingRadio: "Please select a value.", // Displayed when a required radio button isn't selected
+  messageValueMissingSelect: "Please select a value.", // Displayed when an option from a required select menu isn't selected
+  messageValueMissingSelectMulti: "Please select at least one value.", // Displayed when an option from a require multi-select menu isn't selected
+  messageTypeMismatchEmail: "Please enter an email address.", // Displayed when a `type="email"` field isn't a valid email
+  messageTypeMismatchURL: "Please enter a URL.", // Displayed when a `type="url"` field isn't a valid URL
+  messageTooShort:
+    "Please lengthen this text to {minLength} characters or more. You are currently using {length} characters.", // Displayed with the `minLength` attribute is used and the input value is too short
+  messageTooLong:
+    "Please shorten this text to no more than {maxLength} characters. You are currently using {length} characters.", // Displayed with the `maxLength` attribute is used and the input value is too long
+  messagePatternMismatch: "Please match the requested format.", // Displayed with the `pattern` attribute is used and the pattern doesn't match (if a `title` attribute is used, that's displayed instead)
+  messageBadInput: "Please enter a number.", // Displayed when the field is numeric (ex. `type="number"`) but the value is not a number
+  messageStepMismatch: "Please select a valid value.", // Displayed when the `step` attribute is used and the value doesn't adhere to it
+  messageRangeOverflow: "Please select a value that is no more than {max}.", // Displayed with the `max` attribute is used and the input value is too hight
+  messageRangeUnderflow: "Please select a value that is no less than {min}.", // Displayed with the `mind` attribute is used and the input value is too low
+  messageGeneric: "The value you entered for this field is invalid.", // A catchall error, displayed when the field fails validation and none of the other conditions apply
 
-	// Messages
-	messageValueMissing: 'Please fill out this field.', // Displayed when a required field is left empty
-	messageValueMissingCheckbox: 'This field is required.', // Displayed when a required checkbox isn't checked
-	messageValueMissingRadio: 'Please select a value.', // Displayed when a required radio button isn't selected
-	messageValueMissingSelect: 'Please select a value.', // Displayed when an option from a required select menu isn't selected
-	messageValueMissingSelectMulti: 'Please select at least one value.', // Displayed when an option from a require multi-select menu isn't selected
-	messageTypeMismatchEmail: 'Please enter an email address.', // Displayed when a `type="email"` field isn't a valid email
-	messageTypeMismatchURL: 'Please enter a URL.', // Displayed when a `type="url"` field isn't a valid URL
-	messageTooShort: 'Please lengthen this text to {minLength} characters or more. You are currently using {length} characters.', // Displayed with the `minLength` attribute is used and the input value is too short
-	messageTooLong: 'Please shorten this text to no more than {maxLength} characters. You are currently using {length} characters.', // Displayed with the `maxLength` attribute is used and the input value is too long
-	messagePatternMismatch: 'Please match the requested format.', // Displayed with the `pattern` attribute is used and the pattern doesn't match (if a `title` attribute is used, that's displayed instead)
-	messageBadInput: 'Please enter a number.', // Displayed when the field is numeric (ex. `type="number"`) but the value is not a number
-	messageStepMismatch: 'Please select a valid value.', // Displayed when the `step` attribute is used and the value doesn't adhere to it
-	messageRangeOverflow: 'Please select a value that is no more than {max}.', // Displayed with the `max` attribute is used and the input value is too hight
-	messageRangeUnderflow: 'Please select a value that is no less than {min}.', // Displayed with the `mind` attribute is used and the input value is too low
-	messageGeneric: 'The value you entered for this field is invalid.', // A catchall error, displayed when the field fails validation and none of the other conditions apply
+  // Form Submission
+  disableSubmit: false, // If true, don't submit the form to the server (for Ajax for submission)
+  onSubmit: function(form, fields) {}, // Function to run if the form successfully validates
 
-	// Form Submission
-	disableSubmit: false, // If true, don't submit the form to the server (for Ajax for submission)
-	onSubmit: function (form, fields) {}, // Function to run if the form successfully validates
-
-	// Callbacks
-	beforeShowError: function (field, error) {}, // Function to run before an error is display
-	afterShowError: function (field, error) {}, // Function to run after an error is display
-	beforeRemoveError: function (field) {}, // Function to run before an error is removed
-	afterRemoveError: function (field) {}, // Function to run after an error is removed
-
+  // Callbacks
+  beforeShowError: function(field, error) {}, // Function to run before an error is display
+  afterShowError: function(field, error) {}, // Function to run after an error is display
+  beforeRemoveError: function(field) {}, // Function to run before an error is removed
+  afterRemoveError: function(field) {} // Function to run after an error is removed
 });
 ```
 
@@ -210,12 +206,13 @@ validate.init({
 You can also call Validate.js's public methods in your own scripts.
 
 #### hasError()
+
 Check if a field has a validation error.
 
 ```javascript
 validate.hasError(
-	field, // The field to validate
-	options // User settings, same as the ones passed in during validate.init() [optional]
+  field, // The field to validate
+  options // User settings, same as the ones passed in during validate.init() [optional]
 );
 ```
 
@@ -226,18 +223,19 @@ var field = document.querySelector('[name="email"]');
 var error = validate.hasError(field);
 
 if (error) {
-	// Do something...
+  // Do something...
 }
 ```
 
 #### showError()
+
 Show an error message on a field.
 
 ```javascript
 validate.showError(
-	field, // The field to show an error message for
-	error, // The error message to show
-	options // User settings, same as the ones passed in during validate.init() [optional]
+  field, // The field to show an error message for
+  error, // The error message to show
+  options // User settings, same as the ones passed in during validate.init() [optional]
 );
 ```
 
@@ -245,7 +243,7 @@ validate.showError(
 
 ```javascript
 var field = document.querySelector('[name="email"]');
-var error = 'This field is wrong, dude!';
+var error = "This field is wrong, dude!";
 validate.showError(field, error);
 ```
 
@@ -258,6 +256,7 @@ validate.showError(field, error);
 ```
 
 #### removeError()
+
 Remove the error message from a field.
 
 ```javascript
@@ -268,8 +267,8 @@ Remove the error message from a field.
  * @param  {Object} options User options
  */
 validate.removeError(
-	field, // The field to remove the error from
-	options // User settings, same as the ones passed in during validate.init() [optional]
+  field, // The field to remove the error from
+  options // User settings, same as the ones passed in during validate.init() [optional]
 );
 ```
 
@@ -281,12 +280,12 @@ validate.removeError(field);
 ```
 
 #### destroy()
+
 Destroy the current `validate.init()`. Removes all errors and resets the DOM. This is called automatically during the `init` function to remove any existing initializations.
 
 ```javascript
 validate.destroy();
 ```
-
 
 ## Browser Compatibility
 
@@ -299,8 +298,6 @@ Unfortunately, not all validation types are supported by all versions of IE and 
 Use the included polyfill version of Validate (or include your own) to push support back to IE10, and add missing features to partially supported browsers.
 
 If you also include [Eli Grey's classList.js polyfill](https://github.com/eligrey/classList.js/), you can push support even further, back to IE9.
-
-
 
 ## License
 
