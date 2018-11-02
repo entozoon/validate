@@ -5,6 +5,24 @@
 ## Install
 
     npm i --save validate-npm-wrapper
+    
+### Use
+```js
+import validate from "validate-npm-wrapper";
+validate.init();
+```
+Or, typescript:
+```js
+import * as validate from "validate-npm-wrapper";
+(<any>validate).init();
+```
+
+With any customisations necessary as explained below.
+
+_______
+_______
+    
+
 
 A lightweight form validation script that augments native HTML5 form validation elements and attributes, providing a better user experience and giving you more control.
 
